@@ -1,9 +1,11 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SeleniumTest {
@@ -19,6 +21,18 @@ public class SeleniumTest {
         WebElement agreeButton = driver.findElement(By.xpath("//span[contains(text(),'Zgadzam')]"));
         //klikniecie przycisku
         agreeButton.click();
+        // powrot do pierwotnego okna
+        driver.switchTo().defaultContent();
+        //znajdź pole wyszukiwania
+        WebElement searchField = driver.findElement(By.name("q"));
+        // wprowadź wartość selenium do pola
+        searchField.sendKeys("Selenium");
+        //zasymuluj naciśnięcie enter
+        searchField.sendKeys(Keys.ENTER);
+        //znaleźć rezultat
+        WebElement result = driver.findElement(By.xpath("//a[contains(@href,'selenium.dev')]//span"));
+
+        Assert.assertTrue(result.isDisplayed());
 
     }
     public WebDriver getDriver(String browser) {
