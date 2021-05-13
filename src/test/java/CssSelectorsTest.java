@@ -8,14 +8,14 @@ public class CssSelectorsTest {
 
     @Test
     public void findElements(){
-        WebDriverManager.iedriver().setup();
+        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://testeroprogramowania.github.io/selenium/basics.html");
 
-        By cssId = By.cssSelector("#clickOnMe");
+        By cssId = By.cssSelector("#clickOnMe");  //płotek jeśli po id
         driver.findElement(cssId);
 
-        By cssClass = By.cssSelector(".topSecret");
+        By cssClass = By.cssSelector(".topSecret");  //kropka przed jeśli szukamy po klasie
         driver.findElement(cssClass);
 
         By cssTag = By.cssSelector("input");
@@ -26,6 +26,47 @@ public class CssSelectorsTest {
 
         By cssClass2 = By.cssSelector("[class='topSecret']");
         driver.findElement(cssClass2);
+
+        By all = By.cssSelector("*");
+        driver.findElement(all);
+
+        By ulInsideDiv = By.cssSelector("div ul");
+        By trInTable = By.cssSelector("table tr");
+        By trInBody = By.cssSelector("tbody tr");
+
+        driver.findElement(ulInsideDiv);
+        driver.findElement(trInTable);
+        driver.findElement(trInBody);
+
+        By firstChildUlinDiv = By.cssSelector("div > ul");
+        By firstChildTrinTbody = By.cssSelector("tbody > tr");
+
+        driver.findElement(firstChildUlinDiv);
+        driver.findElement(firstChildTrinTbody);
+
+        By firstFormAfterLabel = By.cssSelector("label + form");
+        By allFormsAfterLabels = By.cssSelector("label ~ form");
+
+        driver.findElement(firstFormAfterLabel);
+        driver.findElement(allFormsAfterLabels);
+
+        By attrTag = By.cssSelector("input[name='fname']");
+        By attrContains = By.cssSelector("[name*='name']");
+        By attrStarts = By.cssSelector("[name^='f']");
+        By attrEnds = By.cssSelector("[name$='name']");
+
+        driver.findElement(attrTag);
+        driver.findElement(attrContains);
+        driver.findElement(attrStarts);
+        driver.findElement(attrEnds);
+
+        By firstChild = By.cssSelector("li:first-child");
+        By lastChild = By.cssSelector("li:last-child");
+        By someChild = By.cssSelector("li:nth-child(3)");
+
+        driver.findElement(firstChild);
+        driver.findElement(lastChild);
+        driver.findElement(someChild);
 
 
 
